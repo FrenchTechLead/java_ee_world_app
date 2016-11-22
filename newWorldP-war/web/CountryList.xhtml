@@ -1,116 +1,113 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui" >
-    <h:head>
-        <title>Facelet Title</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous"></link>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-    </h:head>
-    <h:body>
+<ui:composition template="base.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        All Countries
+    </ui:define>
+
+    <ui:define name="content">
         <f:view>
 
 
             <h:form>
-                <h1><h:outputText value="List"/></h1>
-                <p:dataTable value="#{countryMBean.getCountries()}" var="item">
-                    <p:column>
+                <h1><h:outputText value="Countries List"/></h1>
+                <h:dataTable class="table talbe-striped sortable table-hover table-responsive" value="#{countryMBean.countries}" var="item">
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Code"/>
                         </f:facet>
                         <h:outputText value="#{item.code}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Capital"/>
                         </f:facet>
                         <h:outputText value="#{item.capital}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Code2"/>
                         </f:facet>
                         <h:outputText value="#{item.code2}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Continent"/>
                         </f:facet>
                         <h:outputText value="#{item.continent}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="GNPOld"/>
                         </f:facet>
                         <h:outputText value="#{item.GNPOld}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Gnp"/>
                         </f:facet>
                         <h:outputText value="#{item.gnp}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="GovernmentForm"/>
                         </f:facet>
                         <h:outputText value="#{item.governmentForm}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="HeadOfState"/>
                         </f:facet>
                         <h:outputText value="#{item.headOfState}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="IndepYear"/>
                         </f:facet>
                         <h:outputText value="#{item.indepYear}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="LifeExpectancy"/>
                         </f:facet>
                         <h:outputText value="#{item.lifeExpectancy}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="LocalName"/>
                         </f:facet>
                         <h:outputText value="#{item.localName}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Name"/>
                         </f:facet>
                         <h:outputText value="#{item.name}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Population"/>
                         </f:facet>
                         <h:outputText value="#{item.population}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Region"/>
                         </f:facet>
                         <h:outputText value="#{item.region}"/>
-                    </p:column>
-                    <p:column>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="SurfaceArea"/>
                         </f:facet>
                         <h:outputText value="#{item.surfaceArea}"/>
-                    </p:column>
-                </p:dataTable>
+                    </h:column>
+                </h:dataTable>
             </h:form>
+
         </f:view>
-
-    </h:body>
-</html>
-
+    </ui:define>
+</ui:composition>

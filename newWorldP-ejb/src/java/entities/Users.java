@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
 
 /**
  *
@@ -100,9 +101,12 @@ public class Users implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = sha1Hex(password);
     }
-
+    
+    public boolean isCorrectPassword(String clear){
+        return this.password.equals(sha1Hex(clear));
+    }
     @Override
     public int hashCode() {
         int hash = 0;
@@ -122,6 +126,8 @@ public class Users implements Serializable {
         }
         return true;
     }
+    
+    
 
     @Override
     public String toString() {

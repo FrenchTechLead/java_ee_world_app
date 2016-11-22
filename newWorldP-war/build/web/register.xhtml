@@ -1,0 +1,40 @@
+<ui:composition template="base.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        Register
+    </ui:define>
+
+    <ui:define name="content">
+        <f:view>
+
+            <div class="col-lg-4 col-lg-offset-4">
+                <h:link value="Login Page" outcome="login" />
+                <h:form>
+                    <h5><h:outputText value="Registration Form"/></h5>
+                    <h:panelGrid columns="1">
+                        <h:outputLabel value="Name:" for="name" />
+                        <h:inputText id="name" value="#{userBean.getUtilisateur().name}" title="Name" required="true" requiredMessage="The Name field is required."/>
+                        <h:message for="name"/>
+                        
+                        <h:outputLabel value="Email:" for="email" />
+                        <h:inputText id="email" value="#{userBean.getUtilisateur().email}" title="Email" required="true" requiredMessage="The Email field is required."/>
+                        <h:message for="email"/>
+                        
+                        <h:outputLabel value="Password:" for="password" />
+                        <h:inputSecret   id="password" value="#{userBean.getUtilisateur().password}" title="Password" required="true" requiredMessage="The Password field is required."/>
+                        <h:message for="password"/>
+                        
+                        <br></br>
+                        <h:messages globalOnly="true" infoClass="info" />
+                        <h:commandButton class="btn btn-block btn-success" value="Inscription" action="#{userBean.createUser}" />
+                    </h:panelGrid>
+                </h:form>
+            </div>
+        </f:view>
+
+    </ui:define>
+</ui:composition>
