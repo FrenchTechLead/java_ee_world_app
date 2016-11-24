@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
 import session.UsersManager;
 
 /**
@@ -45,6 +46,33 @@ public  class UsersMBean implements Serializable {
         
         
     }
+    
+    public String login(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        Users us = usersManager.getUserByEmail(user.getEmail().toLowerCase());
+        if(us == null){
+            FacesMessage message = new FacesMessage( "Aucun utilisateur trouvé avec cette adresse mail !" );
+            FacesContext.getCurrentInstance().addMessage( null, message );
+            return null;
+        }
+
+        if(user.getPassword().equals(us.getPassword())){
+            context.getExternalContext().getSessionMap().put("user", user);
+            return "userhome?faces-redirect=true";
+            
+        }else{
+            FacesMessage message = new FacesMessage( "Mauvais mot de passe !" );
+            FacesContext.getCurrentInstance().addMessage( null, message );
+            return null;
+        }
+
+    }
+    
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login?faces-redirect=true";
+    }
+    
     
     public List<Users>getUsers() {  
         return usersManager.getAllUsers();
