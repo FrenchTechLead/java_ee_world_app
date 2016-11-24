@@ -9,7 +9,12 @@
     </ui:define>
 
     <ui:define name="content">
-        
+        <h:panelGroup rendered="#{not empty user}">
+            <p>Welcome, #{user.getName()}</p>
+            <h:form>
+                <h:commandButton value="logout" action="#{userBean.logout}" />
+            </h:form>
+        </h:panelGroup>
             
 
     </ui:define>

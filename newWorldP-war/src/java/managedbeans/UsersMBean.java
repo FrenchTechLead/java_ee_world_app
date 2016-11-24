@@ -57,7 +57,7 @@ public  class UsersMBean implements Serializable {
         }
 
         if(user.getPassword().equals(us.getPassword())){
-            context.getExternalContext().getSessionMap().put("user", user);
+            context.getExternalContext().getSessionMap().put("user", us);
             return "userhome?faces-redirect=true";
             
         }else{
