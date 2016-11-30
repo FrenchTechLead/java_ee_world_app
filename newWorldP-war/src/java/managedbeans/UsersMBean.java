@@ -13,7 +13,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
 import session.UsersManager;
 
 /**
@@ -58,7 +57,7 @@ public  class UsersMBean implements Serializable {
 
         if(user.getPassword().equals(us.getPassword())){
             context.getExternalContext().getSessionMap().put("user", us);
-            return "userhome?faces-redirect=true";
+            return "secure/userhome?faces-redirect=true";
             
         }else{
             FacesMessage message = new FacesMessage( "Mauvais mot de passe !" );
@@ -70,7 +69,7 @@ public  class UsersMBean implements Serializable {
     
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login?faces-redirect=true";
+        return "/login?faces-redirect=true";
     }
     
     
