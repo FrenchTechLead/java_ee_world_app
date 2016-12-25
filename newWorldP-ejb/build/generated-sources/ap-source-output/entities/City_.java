@@ -5,11 +5,11 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-12-24T21:18:47")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-12-25T17:59:37")
 @StaticMetamodel(City.class)
 public class City_ { 
 
-    public static volatile SingularAttribute<City, Country> countryCode;
+    public static volatile SingularAttribute<City, Country> owningCountry;
     public static volatile SingularAttribute<City, String> district;
     public static volatile SingularAttribute<City, String> name;
     public static volatile SingularAttribute<City, Integer> id;

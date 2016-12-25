@@ -6,16 +6,21 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,6 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Country.findBySurfaceArea", query = "SELECT c FROM Country c WHERE c.surfaceArea = :surfaceArea  order by c.name"),
     @NamedQuery(name = "Country.findByFlagCode", query = "SELECT c FROM Country c WHERE c.flagCode = :flagCode  order by c.name")})
 public class Country implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
+    private Collection<Countrylanguage> countrylanguageCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,6 +79,12 @@ public class Country implements Serializable {
     @Size(min = 1, max = 2)
     @Column(name = "flagCode")
     private String flagCode;
+    
+    @OneToMany(mappedBy="owningCountry")
+    private Set<City> cities ;
+    
+    //@OneToMany(mappedBy="owningCountry")
+    //private Set<Countrylanguage> languages ;
 
     public Country() {
     }
@@ -164,6 +178,12 @@ public class Country implements Serializable {
         this.flagCode = flagCode;
     }
 
+    public Set<City> getCities() {
+        return cities;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -187,6 +207,15 @@ public class Country implements Serializable {
     @Override
     public String toString() {
         return "entities.Country[ code=" + code + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Countrylanguage> getCountrylanguageCollection() {
+        return countrylanguageCollection;
+    }
+
+    public void setCountrylanguageCollection(Collection<Countrylanguage> countrylanguageCollection) {
+        this.countrylanguageCollection = countrylanguageCollection;
     }
     
 }

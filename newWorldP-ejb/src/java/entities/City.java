@@ -51,7 +51,7 @@ public class City implements Serializable {
     private Integer population;
     @JoinColumn(name = "CountryCode", referencedColumnName = "Code")
     @ManyToOne
-    private Country countryCode;
+    private Country owningCountry;
 
     public City() {
     }
@@ -93,11 +93,11 @@ public class City implements Serializable {
     }
 
     public Country getCountryCode() {
-        return countryCode;
+        return owningCountry;
     }
 
     public void setCountryCode(Country countryCode) {
-        this.countryCode = countryCode;
+        this.owningCountry = countryCode;
     }
 
     @Override
