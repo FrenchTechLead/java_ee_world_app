@@ -83,8 +83,8 @@ public class Country implements Serializable {
     @OneToMany(mappedBy="owningCountry")
     private Set<City> cities ;
     
-    //@OneToMany(mappedBy="owningCountry")
-    //private Set<Countrylanguage> languages ;
+    @OneToMany(mappedBy="country")
+    private Set<Countrylanguage> languages ;
 
     public Country() {
     }
