@@ -22,9 +22,9 @@
                             <h:outputLabel value="Password:" for="password" />
                             <h:inputSecret   id="password" class="form-control" value="#{userBean.getUtilisateur().password}" title="Password" required="true" requiredMessage="The Password field is required."/>
                             <h:message for="password"/>
-                        
-                            <h:link value="Create new account" outcome="register" />
                             <br></br>
+                            <h:link value="Create new account" outcome="register" />
+                            <br></br><br></br>
                             <h:messages globalOnly="true" infoClass="info" />
                             <h:commandButton class="btn btn-block btn-primary" value="Connexion !" action="#{userBean.login}" />
                     </h:form>

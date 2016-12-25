@@ -1,4 +1,4 @@
-<ui:composition template="/base.xhtml"
+<ui:composition template="userBaseTemplate.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -8,105 +8,50 @@
         All Countries
     </ui:define>
 
-    <ui:define name="content">
+    <ui:define name="content">     
         <f:view>
-
-
-            <h:form>
-                <h1><h:outputText value="Countries List"/></h1>
-                <h:dataTable class="table talbe-striped sortable table-hover table-responsive" value="#{countryMBean.countries}" var="item">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Code"/>
-                        </f:facet>
-                        <h:outputText value="#{item.code}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Capital"/>
-                        </f:facet>
-                        <h:outputText value="#{item.capital}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Code2"/>
-                        </f:facet>
-                        <h:outputText value="#{item.code2}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Continent"/>
-                        </f:facet>
-                        <h:outputText value="#{item.continent}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="GNPOld"/>
-                        </f:facet>
-                        <h:outputText value="#{item.GNPOld}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Gnp"/>
-                        </f:facet>
-                        <h:outputText value="#{item.gnp}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="GovernmentForm"/>
-                        </f:facet>
-                        <h:outputText value="#{item.governmentForm}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="HeadOfState"/>
-                        </f:facet>
-                        <h:outputText value="#{item.headOfState}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="IndepYear"/>
-                        </f:facet>
-                        <h:outputText value="#{item.indepYear}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="LifeExpectancy"/>
-                        </f:facet>
-                        <h:outputText value="#{item.lifeExpectancy}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="LocalName"/>
-                        </f:facet>
-                        <h:outputText value="#{item.localName}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Name"/>
-                        </f:facet>
-                        <h:outputText value="#{item.name}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Population"/>
-                        </f:facet>
-                        <h:outputText value="#{item.population}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Region"/>
-                        </f:facet>
-                        <h:outputText value="#{item.region}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="SurfaceArea"/>
-                        </f:facet>
-                        <h:outputText value="#{item.surfaceArea}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
+            <div class="row">
+                <div class="col-xs-6">
+                    <h:form>
+                        <br></br>
+                        <h:dataTable class="table talbe-striped sortable table-hover table-responsive" value="#{countryMBean.countries}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Pays" class="clickable"/>
+                                </f:facet>
+                                <h:outputText value="#{item.name}"/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Drapeau" class="clickable"/>
+                                </f:facet>
+                                <span style="font-size:30px" class="flag-icon flag-icon-${fn:toLowerCase(item.flagCode)}"></span>
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Continent" class="clickable" />
+                                </f:facet>
+                                <h:outputText value="#{item.continent}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Détails"/>
+                                </f:facet>
+                                    <h:commandButton class="btn btn-sm btn-primary"  action="#{spiel.dice()}"  value="Show">
+                                        <f:ajax render="gameinfo" onevent="animate" />                            
+                                    </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <div class="col-xs-6">
+                    <br></br>
+                    <div class="alert-info" id="detailsContainer">
+                        Veillez cliquer sur <strong>Show</strong> pour afficher quelques informations sur le pays.
+                    </div>
+                </div>
+            </div>
 
         </f:view>
     </ui:define>

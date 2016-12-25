@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    >
+    <h:head>
+        <title><ui:insert name="title">Default title</ui:insert></title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"  />
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="tether.min.css"  />
+        <h:outputStylesheet library="css" name="flag-icon.min.css"  />
+        <h:outputStylesheet library="css" name="mycss.css"  />
+        <h:outputScript library="js" name="jquery.js" />
+        <h:outputScript library="js" name="sortable.js" />
+        <h:outputScript library="js" name="tether.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="bootstrap4.js" />
+        <h:outputScript library="js" name="myjs.js" />
+
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">Welcome, #{user.getName()} :)</a>
+                </div>
+                <h:form>
+                <p class="navbar-text navbar-right"><h:commandLink action="#{userBean.logout}" value="Se déconnecter" /></p>
+                </h:form>
+            </div>
+        </nav>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                
+                <li role="presentation">
+                    <h:link value="userHome" outcome="userhome" />
+                </li>
+                <li role="presentation" >
+                    <h:link value="All Countries" outcome="CountryList" />
+                </li>
+                <li role="presentation">
+                    <a href="#">Messages</a>
+                </li>
+            </ul>
+            <ui:insert name="content">Default content</ui:insert>
+        </div>
+
+    </h:body>
+    
+    <script>
+        $( document ).ready(function() {
+            var path = window.location.pathname;
+            path = path.replace(/\/$/, "");
+            path = decodeURIComponent(path);
+
+            $("li").each(function () {
+                var href = $(this).children().attr('href');
+                if (path.substring(0, href.length) === href) {
+                    $(this).closest('li').addClass('active');
+                }
+            });
+        });
+    </script>
+</html>
+
