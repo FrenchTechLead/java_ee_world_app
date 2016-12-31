@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,7 @@ import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
  * @author MacBook
  */
 @Entity
+@Cacheable(false)
 @Table(name = "users")
 @XmlRootElement
 @NamedQueries({

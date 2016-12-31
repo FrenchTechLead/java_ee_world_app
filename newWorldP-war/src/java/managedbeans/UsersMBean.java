@@ -69,7 +69,7 @@ public  class UsersMBean implements Serializable {
     }
     
    public List<Recherche> getResearchByUser(){
-       FacesContext context = FacesContext.getCurrentInstance();
+        FacesContext context = FacesContext.getCurrentInstance();
         Users currentUser = (Users)context.getExternalContext().getSessionMap().get("user");
         List<Recherche> recherches = null;
         recherches = usersManager.getRechercheByUser(currentUser);

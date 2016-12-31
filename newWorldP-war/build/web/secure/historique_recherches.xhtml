@@ -11,19 +11,18 @@
     <ui:define name="content">
         
         <f:view>
-            <br />
-            
             <h:form>
-                <h:dataTable class="table talbe-striped sortable table-hover table-responsive" value="#{userBean.researchByUser}" var="item">
+                <h1><h:outputText value="List"/></h1>
+                <h:dataTable class="table talbe-striped sortable table-hover table-responsive" id="my-table" value="#{rechercheMBean.recherchesByUser}" var="item" >    
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Recherche"/>
+                            <h:outputText value="Texte"/>
                         </f:facet>
                         <h:outputText value="#{item.texte}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Date et heure"/>
+                            <h:outputText value="DateTime"/>
                         </f:facet>
                         <h:outputText value="#{item.dateTime}">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
@@ -33,12 +32,10 @@
                         <f:facet name="header">
                             <h:outputText value="Supprimer"/>
                         </f:facet>
-                        <h:commandButton actionListener="@" class="btn btn-sm btn-danger" action="#{userBean.deleteResearch(item.id)}" value="Supprimer" />
+                        <h:commandButton class="btn-danger" value="X" action="#{rechercheMBean.deleteRecherche(item.id)}" />
                     </h:column>
                 </h:dataTable>
             </h:form>
         </f:view>
-
-
     </ui:define>
 </ui:composition>

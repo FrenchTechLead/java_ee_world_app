@@ -56,6 +56,7 @@ public class CountryManager {
             Recherche recherche = new Recherche(keyWord, currentUser);
             try {
                 em.persist(recherche);
+                em.flush();
             } catch (Exception e) {
 
             }
