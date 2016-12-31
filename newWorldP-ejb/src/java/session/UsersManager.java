@@ -5,6 +5,7 @@
  */
 package session;
 
+import entities.Recherche;
 import entities.Users;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -39,6 +40,16 @@ public class UsersManager {
             return null;
         }
         
+    }
+    
+    public List<Recherche> getRechercheByUser(Users user){
+        return user.getRecherches();
+    }
+    public void deleteResearch(int idResearch){
+        System.out.println("removing recherche : "+idResearch);
+        Recherche re = em.find(Recherche.class, idResearch);
+        em.remove(re);
+        em.flush();
     }
 
     public Users update(Users user) {

@@ -1,0 +1,44 @@
+<ui:composition template="userBaseTemplate.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+       Mes recherches
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <f:view>
+            <br />
+            
+            <h:form>
+                <h:dataTable class="table talbe-striped sortable table-hover table-responsive" value="#{userBean.researchByUser}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Recherche"/>
+                        </f:facet>
+                        <h:outputText value="#{item.texte}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date et heure"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateTime}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Supprimer"/>
+                        </f:facet>
+                        <h:commandButton actionListener="@" class="btn btn-sm btn-danger" action="#{userBean.deleteResearch(item.id)}" value="Supprimer" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+
+    </ui:define>
+</ui:composition>

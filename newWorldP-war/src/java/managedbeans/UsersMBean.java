@@ -5,6 +5,7 @@
  */
 package managedbeans;
 
+import entities.Recherche;
 import entities.Users;
 import java.io.Serializable;
 import java.util.List;
@@ -66,6 +67,20 @@ public  class UsersMBean implements Serializable {
         }
 
     }
+    
+   public List<Recherche> getResearchByUser(){
+       FacesContext context = FacesContext.getCurrentInstance();
+        Users currentUser = (Users)context.getExternalContext().getSessionMap().get("user");
+        List<Recherche> recherches = null;
+        recherches = usersManager.getRechercheByUser(currentUser);
+        return recherches;
+   }
+   
+   public String deleteResearch(int id){
+       usersManager.deleteResearch(id);
+       getResearchByUser();
+       return null;
+   }
     
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();

@@ -181,6 +181,10 @@ public class Country implements Serializable {
     public Set<City> getCities() {
         return cities;
     }
+
+    public Set<Countrylanguage> getLanguages() {
+        return languages;
+    }
     
     
 
