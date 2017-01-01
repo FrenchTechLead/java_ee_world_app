@@ -26,10 +26,6 @@ public class RechercheManager {
         
     }
     
-    public Recherche getRechercheById(int id){
-        return em.find(Recherche.class, id);
-    }
-    
     public void deleteRecherche(int id){
         Recherche re = em.find(Recherche.class, id);
         em.remove(re);

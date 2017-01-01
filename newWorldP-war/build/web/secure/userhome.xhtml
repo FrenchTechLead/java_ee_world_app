@@ -1,5 +1,6 @@
 <ui:composition template="userBaseTemplate.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
@@ -7,9 +8,86 @@
     <ui:define name="title">
         User HomePage
     </ui:define>
-
+    
     <ui:define name="content">
-            
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js?key=AIzaSyA4ZmjdHuZE-7kErkP6v0vvZPZe760T9No&amp;libraries=places&amp;sensor=false;"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  
 
+        <script type="text/javascript">
+          google.charts.load('upcoming', {'packages':['geochart']});
+          google.charts.setOnLoadCallback(drawRegionsMap);
+
+          function drawRegionsMap() {
+
+            var data = google.visualization.arrayToDataTable([
+              ['Country','name', 'Population', 'Surface'],
+              <ui:repeat value="#{countryMBean.countries}" var="country">
+                    ['#{country.flagCode}','#{country.name}' ,#{country.population},#{country.surfaceArea} ],
+              </ui:repeat>
+
+            ]);
+
+            var options = {legend:"Population par pays"};
+
+            var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+            chart.draw(data, options);
+            google.visualization.events.addListener(chart, 'select', function() {
+                var selection = chart.getSelection()[0];
+                var country = data.getValue(selection.row, 1);
+                console.log(country);
+                showDetails(chart.getSelection()[1])
+            });
+
+          }
+        </script>
+        
+        <div style="font-size: 50px" class="text-center">Carte du monde</div>
+        <div id="regions_div" style="width: 1100px;"></div>
+        <div style="font-size: 50px" class="text-center">Top 10 Produit National Brut</div>
+        <canvas id="gpn"></canvas><br /><br />
+        <div style="font-size: 50px" class="text-center">Top 10 Espérence de Vie</div>
+        <div style="width:600px" class="center-block"><canvas class="center-block" id="life" ></canvas></div>
+        
+        <script type="text/javascript">//GPN Script
+            var ctx = document.getElementById('gpn').getContext('2d');
+            var json = #{countryMBean.topTenGPN};
+            var labels = Object.keys(json);
+            var values = labels.map(function (k) { return json[k]; });
+            data = {
+                labels:labels,
+                datasets: [
+                                {
+                                    label: "Produit National Brut (Millions de dollars)",
+                                    backgroundColor: ['rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(10, 100, 30, 0.2)','rgba(20, 200, 40, 0.2)','rgba(30, 250, 255, 0.2)','rgba(190, 255, 5, 0.2)'],
+                                    borderColor: ['rgba(255,99,132,1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(10, 100, 30, 1)','rgba(20, 200, 40, 1)','rgba(30, 250, 255, 1)','rgba(190, 255, 5, 1)'],
+                                    borderWidth: 1,
+                                    data: values,
+                                }
+                            ]
+            };
+            new Chart(ctx, {type: "bar",data:data});
+            
+            
+            //life char
+            var ctx = document.getElementById('life').getContext('2d');
+            var json = #{countryMBean.topTenLife};
+            var labels = Object.keys(json);
+            var values = labels.map(function (k) { return json[k]; });
+            data = {
+                labels:labels,
+                datasets: [
+                                {
+                                    label: "Espérence de vie (Ans)",
+                                    backgroundColor: ['rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(10, 100, 30, 0.2)','rgba(20, 200, 40, 0.2)','rgba(30, 250, 255, 0.2)','rgba(190, 255, 5, 0.2)'],
+                                    borderColor: ['rgba(255,99,132,1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(10, 100, 30, 1)','rgba(20, 200, 40, 1)','rgba(30, 250, 255, 1)','rgba(190, 255, 5, 1)'],
+                                    borderWidth: 1,
+                                    data: values,
+                                }
+                            ]
+            };
+            new Chart(ctx, {type: "polarArea",data:data});
+        </script>
     </ui:define>
 </ui:composition>

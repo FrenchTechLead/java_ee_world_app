@@ -62,7 +62,15 @@ public class CountryManager {
             }
         }
     }
-
+    
+    public List<Country> getTopTenGPN(){
+        Query q = em.createNativeQuery("SELECT * FROM Country c ORDER BY gnp DESC limit 10",Country.class);
+        return (List<Country>)q.getResultList();
+    }
+    public List<Country> getTopTenLife(){
+        Query q = em.createNativeQuery("SELECT * FROM Country c ORDER BY lifeExpectancy DESC limit 10",Country.class);
+        return (List<Country>)q.getResultList();
+    }
     public Country update(Country country) {
         return em.merge(country);
     }

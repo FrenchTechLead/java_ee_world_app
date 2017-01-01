@@ -16,6 +16,7 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.persistence.Query;
 import session.CountryManager;
 /**
  *
@@ -140,4 +141,32 @@ public class CountryMBean implements Serializable{
         
         return toReturn;
     }
+    
+        public String getTopTenGPN(){
+            List<Country> liste = countryManager.getTopTenGPN();
+            String toReturn = "{";
+            for(Country c : liste){
+                toReturn+="\""+ c.getName()+"\":"+c.getGnp().intValue()+",";
+            }
+            toReturn= toReturn.substring(0, toReturn.length()-1);
+            toReturn+="}";
+            System.out.println(toReturn);
+        return toReturn;
+    }
+    
+    public String getTopTenLife(){
+            List<Country> liste = countryManager.getTopTenGPN();
+            String toReturn = "{";
+            for(Country c : liste){
+                toReturn+="\""+ c.getName()+"\":"+c.getLifeExpectancy().intValue()+",";
+            }
+            toReturn= toReturn.substring(0, toReturn.length()-1);
+            toReturn+="}";
+            System.out.println(toReturn);
+        return toReturn;
+    }
+    
+    
+    
+    
 }
